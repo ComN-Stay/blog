@@ -20,15 +20,7 @@
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/asset-mapper ###
-/public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
 
-###> leapt/core-bundle ###
-/public/uploads/
-###< leapt/core-bundle ###
-
-###> leapt/im-bundle ###
-/public/cache/
-###< leapt/im-bundle ###
 .DS_Store

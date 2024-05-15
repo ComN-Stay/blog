@@ -1,0 +1,368 @@
+/*********** general *************/
+
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #858796;
+    text-align: left;
+    background-color: #fff;
+}
+
+body.bg-gradient-primary {
+    background-color: #232427;
+    background-image: linear-gradient(180deg, #232427 20%, #224abe 100%);
+    min-height: 100vh;
+}
+.no-cursor {
+    cursor: default !important;
+}
+
+.dselect-wrapper .form-select {
+    min-height: 2.4rem;
+}
+
+.dselect-wrapper .dropdown-menu {
+    width: 100%;
+}
+
+.dselect-items .dropdown-item {
+    padding-left: 15px;
+}
+
+.dselect-items .dropdown-header {
+    font-weight: bold;
+    color: #fff;
+    background-color: chocolate;
+}
+.thumbnail {
+    max-width: 80px;
+    height: auto;
+}
+.thumbnail-medium {
+    max-width: 200px;
+    height: auto;
+}
+.select2-container {
+    width: 100% !important;
+}
+ul > li {
+    list-style: none;
+}
+.hidden {
+    display: none !important;
+}
+.selected {
+    background-color: orangered;
+  }
+
+/************* colors **********/
+.invoice-status-1,
+.text-red,
+.fa-trash-can {
+    color: red;
+}
+.invoice-status-2,
+.invoice-status-4 {
+    color: orangered;
+}
+.invoice-status-3,
+.text-green {
+    color: green;
+}
+.invoice-status-5,
+.invoice-status-6 {
+    color: purple;
+}
+.invoice-status-7 {
+    color: chocolate;
+}
+
+/************** admin login **************/
+.card-boby {
+    padding: 1.25rem 0 !important;
+}
+
+.bg-login-image {
+    background: url(/assets/img/logo-comnstay.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+form.user .form-control-user {
+    font-size: .8rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+
+.modal-header .close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
+label.required:after {
+    content: " *";
+    color: #ff0000;
+}
+
+.h2 {
+    font-size: clamp(2.5rem, 1.852vw + 1.444rem, 5rem);
+    font-weight: 700;
+    color: #f07e23;
+    text-align: center;
+    z-index: 5;
+    width: 100%;
+}
+
+/*********** tables ***********/
+
+.action_cell {
+    width: 9vw;
+    align-items: center;
+}
+
+.form_list {
+    float: left;
+    display: block;
+}
+
+.neg-1 {
+    margin-top: -.66vh;
+}
+
+/************* alertes ************/
+.alert {
+    position: fixed;
+    z-index: 10000;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-flow: row;
+    margin: 10px 0;
+    width: 30%;
+    min-height: 90px;
+    height: auto;
+    background-color: #cecece;
+    border-radius: 4px;
+    color: #fff;
+    box-shadow: 0px 10px 46px -21px rgba(0, 0, 0, 0.75);
+    transition: all 0.3s cubic-bezier(0, 0, 0.3, 1);
+    cursor: pointer;
+}
+.alert:hover {
+    box-shadow: 0px 10px 60px -21px rgba(0, 0, 0, 0.80);
+}
+.alert.success {
+    background-color: #3db56e;
+}
+.alert.notice {
+    background-color: #67a4c0;
+}
+.alert.wait {
+    background-color: #c3d2d9;
+}
+.alert.error {
+    background-color: #c84346;
+}
+.alert-icon {
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.alert-content {
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
+    width: 100%;
+}
+.alert-content .alert-close {
+    position: absolute;
+    font-size: 0.7em;
+    top: 7px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/**************** nav ***************/
+.bg-gradient-primary {
+    background-color: #232427;
+    background-image: linear-gradient(180deg, #232427 30%, #224abe 80%);
+    background-size: cover;
+}
+
+.sidebar .nav-item .nav-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    width: 14rem;
+    padding: .5vh 1.5vh;
+}
+
+.sidebar-brand-icon img {
+    height: 60px;
+    width: auto;
+}
+
+.sidebar li .submenu{ 
+	list-style: none; 
+	margin: 0; 
+	padding: 0; 
+	padding-left: 1rem; 
+	padding-right: 1rem;
+}
+
+.has-submenu {
+    margin-bottom: .5rem;
+}
+
+.caretIcon {
+    float: right;
+    margin-right: 1rem;
+}
+
+.caretIconClose::after {
+    content: attr(data-after)'\f105';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    margin-left:10px;
+}
+
+.caretIconOpen::after {
+    content: attr(data-after)'\f107';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    margin-left:10px;
+}
+
+.sidebar.toggled .nav-item .nav-link {
+    text-align: center;
+    padding: 0.75rem 0;
+    width: 8rem;
+}
+
+.sidebar.toggled {
+    overflow: visible;
+    width: 8rem !important;
+}
+
+.sidebar.toggled .nav-item .submenu .nav-item .nav-link span {
+    font-size: 0.65rem;
+    display: block;
+    width: 7rem;
+    margin-left: -1rem;
+    text-align: left;
+}
+
+.sidebar.toggled .nav-item .nav-link span.caretIcon {
+    margin-top: -1rem;
+}
+/************** forms ******************/
+.form-label {
+    margin-bottom: 0.5rem;
+    min-width: fit-content;
+}
+
+#articles_fk_tags {
+    display: flex;
+}
+
+#articles_fk_tags .form-check {
+    margin-right: 1.3rem;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.375rem 0.75rem 0 2rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.35rem;
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+span.form-control {
+    display: flex;
+    justify-content: space-between;
+}
+
+/********* Pagination ***********/
+
+.pagination {
+    display: flex;
+    justify-content: center!important;
+   }
+  .pagination ul {
+    display: inline-block;
+    margin-left: 0;
+    margin-bottom: 0;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  }
+  .pagination li {
+      display: inline;
+    }
+  .pagination a {
+    float: left;
+    padding: 0 14px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+    color: #858796
+  }
+  .pagination a:hover,
+  .pagination .active a {
+    background-color: #f5f5f5;
+  }
+  .pagination .active a {
+    color: lightgray;
+    cursor: default;
+  }
+  .pagination .disabled span,
+  .pagination .disabled a,
+  .pagination .disabled a:hover {
+    color: lightgray;
+    background-color: transparent;
+    cursor: default;
+  }
+  .pagination li:first-child a {
+    border-left-width: 1px;
+    border-radius: 3px 0 0 3px;
+  }
+  .pagination li:last-child a {
+    border-radius: 0 3px 3px 0;
+  }
+  
+  .pagination-centered {
+    text-align: center;
+  }
