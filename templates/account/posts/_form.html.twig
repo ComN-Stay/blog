@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-4 col-xs-12">
+            {{ form_row(form.picture) }}
+            {% if post.picture is not null %}
+                <div>
+                    <img src="/assets/img/uploads/{{ post.picture }}" class="img-fluid">
+                    <button type="button" class="btn btn-danger btn-xl _deleteLogo" data-entity="posts" data-universe="account" data-id="{{ post.id }}">Supprimer l'image</button>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-8 col-xs-12">
+            {{ form_row(form.title) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            {{ form_row(form.summary) }}
+        </div>
+        <div class="col-md-6 col-xs-12">
+            {{ form_row(form.content) }}
+        </div>
+    </div>
+    <div class="row">
+        {{ form_row(form.fk_tags) }}
+    </div>
+    <span class="hidden">
+        {{ form_row(form.date_add) }}
+        {{ form_row(form.slug) }}
+    </span>
+    <button class="btn btn-success btn-xl">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

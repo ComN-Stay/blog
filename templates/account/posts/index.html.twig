@@ -1,0 +1,43 @@
+{% extends 'account/base_account.html.twig' %}
+
+{% block title %}Mes posts{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Titre</th>
+                <th>Résumé</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>
+                    {% if post.picture is not null %}
+                        <img src="/assets/img/uploads/{{ post.picture }}" class="img-fluid" style="max-width:70%; height:auto">
+                    {% endif %}
+                </td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.summary|raw }}</td>
+                <td>{{ post.dateAdd ? post.dateAdd|date('d/m/Y') : '' }}</td>
+                <td class="action_cell">
+                    <a class="form_list mr-1" href="{#{ path('app_posts_account_show', {'slug': post.slug}) }#}" target="_blank"><i class="fa-solid fa-eye fa-lg"></i></a>
+                    <a class="form_list" href="{{ path('app_posts_account_edit', {'id': post.id}) }}"><i class="fa-solid fa-pen-to-square fa-lg ml-3"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5"><a class="btn btn-success btn-xl" href="{{ path('app_posts_account_new') }}">Rédiger mon premier post !</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if posts is not empty %}
+        <a class="btn btn-success btn-xl" href="{{ path('app_posts_account_new') }}">Nouveau post</a>
+    {% endif %}
+{% endblock %}

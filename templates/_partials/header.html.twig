@@ -1,0 +1,46 @@
+<header>
+	<div class="wrap-nav">
+		<nav id="navbar">
+			<div class="logo">
+				<a href="{{ path('app_home') }}">
+					<img src="/assets/img/logo.png" class="logoNav" title="logo" alt="logo">
+				</a>
+			</div>
+			<ul class="menu">
+				<li class="item">
+					<a href="" class="link-item" style="color:white">accueil</a>
+				</li>
+				<li class="item">
+					<a href="" class="link-item" style="color:white">Item 1</a>
+				</li>
+				<li class="item">
+					<a href="" class="link-item" style="color:white">Item 2</a>
+				</li>
+				<li class="item">
+					<a href="" class="link-item" style="color:white">Item 3</a>
+				</li>
+				<li class="item">
+					<a href="" class="link-item" style="color:white">Item 4</a>
+				</li>
+			</ul>
+			<div class="link-right">
+				<div class="link-user">
+					{% if app.user.id is defined %}
+						<a href="{{ path('app_logout') }}" class="user">
+							<i class="fa-solid fa-right-from-bracket fa-lg"></i>Déconnexion
+						</a>
+					{% else %}
+						<a href="{{ path('app_login') }}" class="user">
+							<i class="fa-solid fa-user fa-lg"></i>Créer mon compte / Connexion
+						</a>
+					{% endif %}
+				</div>
+				<div class="burger">
+					<div class="line1"></div>
+					<div class="line2"></div>
+					<div class="line3"></div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>

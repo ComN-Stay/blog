@@ -1,0 +1,53 @@
+{% extends 'base_login.html.twig' %}
+
+{% block body %}
+
+    <h2 class="text-center mb-3 mt-3 h2">Mon compte</h2>
+    <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12 col-md-9">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                                    <img src="/assets/img/logo.png" class="img-fluid" style="max-width:150px; height:auto" alt="logo">
+                                </div>
+                                <div class="col-lg-6 card-block-text">
+                                    <div class="p-5">
+                                        <form method="post">
+                                            {% if error %}
+                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            {% endif %}
+
+                                            <div class="form-group">
+                                                <input type="email" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Votre email ..." value="{{ last_username }}" name="email" id="inputEmail">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control form-control-user"
+                                                    id="exampleInputPassword" placeholder="Mot de passe" name="password" id="inputPassword">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox small">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                    <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" name="_csrf_token"
+                                                value="{{ csrf_token('authenticate') }}"
+                                            >
+
+                                            <button class="btn btn-primary btn-user btn-block" type="submit">
+                                                Me connecter
+                                            </button>
+                                        </form>
+                                        <hr>
+                                        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

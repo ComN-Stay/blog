@@ -1,0 +1,18 @@
+# Read the documentation: https://github.com/leapt/im-bundle/blob/master/docs/configuration.rst
+leapt_im:
+    cache_path: cache
+    formats:
+        # resizes to 50 width, at 80% quality
+        small:
+            resize: 50x
+            quality: 80
+
+        # resizes to fit in 200x200, only if bigger, and remove all crap (meta-data, ...)
+        medium:
+            thumbnail: 200x200>
+
+        # crop to get exactly 100x100, keeping the maximum area possible, centered
+        square:
+            resize: 100x100^
+            gravity: center
+            crop: 100x100+0+0

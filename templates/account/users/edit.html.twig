@@ -1,0 +1,92 @@
+{% extends 'account/base_account.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    {{ form_errors(form) }}
+    {{ form_start(form) }}
+        <h2>Mes informations privées</h2>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.fk_gender) }}
+            </div>
+            <div class="col-md-6 col-xs-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.address) }}
+            </div>
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.zip_code) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.city) }}
+            </div>
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.fk_country) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.phone) }}
+            </div>
+        </div>
+        <h2>Mes informations publiques</h2>
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                {{ form_row(form.username) }}
+            </div>
+            <div class="col-md-8 col-xs-12">
+                {{ form_row(form.avatar) }}
+                {% if user and user.avatar is not null %}
+                    <div id="avatarBloc">
+                        <label>Mon avatar</label><br />
+                        <img src="/assets/img/personas/{{ user.avatar }}"  />
+                        <button type="button" class="btn btn-danger btn-xl _deleteAvatar">Supprimer mon avatar</button>
+                    </div>
+                {% endif %}
+                Ou sélectionnez en un ci-dessous
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <h2>Mon mot de passe</h2>
+                {{ form_row(form.password) }}
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <div class="d-flex flex-wrap">
+                    {% for persona in personas %}
+                        <div class="py-2 px-2">
+                            <a href="#" class="_persona" data-id="{{ persona }}">
+                                <img src="/assets/img/personas/{{ persona }}"  />
+                            </a><br />
+                            <input type="radio" id="persona_{{ loop.index }}" class="hidden" name="users[persona]" value="{{ persona }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <span class="hidden">
+                    {{ form_row(form.persona) }}
+                </span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <button class="btn btn-success btn-xl">{{ button_label|default('Mettre à jour') }}</button>
+            <a href="{{ path('app_account') }}" class="btn btn-info btn-xl ml-3">Annuler</a>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

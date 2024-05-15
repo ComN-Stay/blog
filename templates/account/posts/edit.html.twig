@@ -1,0 +1,14 @@
+{% extends 'account/base_account.html.twig' %}
+
+{% block title %}Edition {{ post.title }}{% endblock %}
+
+{% block body %}
+
+    {{ include('account/posts/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <div class="d-flex mt-3">
+        <a href="{{ path('app_posts_account_index') }}" class="btn btn-info mr-3"><i class="fa-solid fa-chevron-left fa-sm mr-3"></i>Retour</a>
+        {{ include('account/posts/_delete_form.html.twig') }}
+    </div>
+    
+{% endblock %}

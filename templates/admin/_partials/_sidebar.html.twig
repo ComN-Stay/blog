@@ -1,0 +1,90 @@
+<!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <img src="/assets/img/logo.png" style="max-height:80%; width:auto;" />
+                </div>
+            </a>
+
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_admin') }}">
+                    <i class="fa-solid fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item has-submenu">
+                <a class="nav-link has-icon" href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Utilisateurs</span>
+                    <span class="caretIcon {% if sidebar is defined and sidebar == 'user' %}caretIconOpen{% else %}caretIconClose{% endif %}"></span>
+                </a>
+                <ul class="submenu collapse {% if sidebar is defined and sidebar == 'user' %}show{% endif %}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{#{ path('app_teams_admin_index') }#}"><span>Administrateurs</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{#{ path('app_users_index') }#}"><span>Utilisateurs</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item has-submenu">
+                <a class="nav-link has-icon" href="#">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>CMS</span>
+                    <span class="caretIcon {% if sidebar is defined and sidebar == 'redac' %}caretIconOpen{% else %}caretIconClose{% endif %}"></span>
+                </a>
+                <ul class="submenu collapse {% if sidebar is defined and sidebar == 'redac' %}show{% endif %}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{#{ path('app_categories_admin_index') }#}"><span>Catégories</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{#{ path('app_tags_index') }#}"><span>Tags</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item has-submenu">
+                <a class="nav-link has-icon" href="#">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Paramètres</span>
+                    <span class="caretIcon {% if sidebar is defined and sidebar == 'params' %}caretIconOpen{% else %}caretIconClose{% endif %}"></span>
+                </a>
+                <ul class="submenu collapse {% if sidebar is defined and sidebar == 'params' %}show{% endif %}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{#{ path('app_transactional_admin_index') }#}"><span>Mails transactionnels</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{#{ path('app_teams_admin_edit', {'id': app.user.id })}#}">
+                    <i class="fa-solid fa-user"></i> 
+                    <span>Mon profil</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{#{ path('app_admin_logout') }#}">
+                    <i class="fa-solid fa-right-from-bracket"></i> 
+                    <span>Déconnexion</span>
+                </a>
+            </li>
+
+            <li class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0 mt-3" id="sidebarToggle"></button>
+            </li>
+
+        </ul>
+    <!-- End of Sidebar -->

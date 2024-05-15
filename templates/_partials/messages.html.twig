@@ -1,0 +1,21 @@
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert {{ label }}">    
+            <span class="alert-icon">
+                {% if label == "success" %}
+                    <i class="fa-solid fa-check fa-xl"></i> 
+                {% elseif label == "error" %} 
+                    <i class="fa-solid fa-xmark fa-xl"></i>
+                {% elseif label == "notice" %} 
+                    <i class="fa-solid fa-exclamation fa-xl"></i>
+                {% elseif label == "wait" %} 
+                    <i class="fa-regular fa-clock fa-xl"></i>
+                {% endif %}   
+            </span>
+            <span class="alert-content">
+                <span class="alert-close"><i class="fa-solid fa-xmark fa-lg"></i></span>
+                <span class="alert-title">{{ message }}</span>
+            </span>    
+        </div>
+    {% endfor %}
+{% endfor %}

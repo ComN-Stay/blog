@@ -1,17 +1,46 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<!DOCTYPE HTML>
+<html lang="fr">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+	<head>
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+		<link rel="stylesheet" href="/assets/css/libraries/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/assets/css/libraries/jquery-msgpopup.css"/>
+		<link rel="stylesheet" href="/assets/css/front/global.css"/>
+	</head>
+
+	<body class="bg-dark">
+		{% include "_partials/messages.html.twig" %}
+		<section class="wrapper-header">
+			{% include "_partials/header.html.twig" %}
+		</section>
+		<section class="wrap-content">
+			<div class="row justify-content-center">
+				<div class="col-xl-10 col-lg-12 col-md-9">
+					<div class="card o-hidden border-0 shadow-lg my-5">
+						<div class="card-body text-dark"> 
+                            {% block body %}{% endblock %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="wrap-footer">
+			{% include "_partials/footer.html.twig" %}
+		</section>
+
+		<script src="/assets/js/libraries/popper.min.js"></script>
+		<script src="/assets/js/libraries/bootstrap.min.js"></script>
+		<script src="/assets/js/libraries/jquery.min.js"></script>
+		<script src="/assets/js/libraries/bootstrap-bundle.min.js"></script>
+		<script src="/assets/js/libraries/jquery.easing.min.js"></script>
+		<script src="/assets/js/libraries/jquery-msgpopup.js"></script>
+		<script src="/assets/js/front/global.js"></script>
+
+		</body>
+
+	</html>
