@@ -1,6 +1,6 @@
 # Afin de déployer et tester l'application sur vos machines, voici la marche à suivre :
 - Avec la console/terminal placez vous dans votre dossier de projets
-- Faites ensuite https://github.com/ComN-Stay/blog.git
+- Faites ensuite git clone https://github.com/ComN-Stay/blog.git
 - Ouvrez le projet dans VSCode
 - Renseignez les paramètres de votre base de données dans le .env
 - Dans la console de VSCode saisissez les commandes suivantes :
