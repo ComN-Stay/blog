@@ -196,7 +196,7 @@ class AppFixtures extends Fixture
             $post[$i]->setSummary($this->faker->paragraphs(1, true));
             $post[$i]->setContent($this->faker->paragraphs(rand(2, 4), true));
             $post[$i]->setDateAdd(new \DateTime(date('Y-m-d')));
-            $post[$i]->setPicture('logo' . rand(1, 10) . '.jpg');
+            $post[$i]->setPicture('logo' . rand(1, 10) . '.png');
             $post[$i]->setSlug($this->slugger->slug($title));
             for($j=0;$j<=4;$j++) {
                 $post[$i]->addFkTag($this->getRandomReference('App\Entity\Tags', $manager));
