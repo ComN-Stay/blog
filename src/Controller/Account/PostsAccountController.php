@@ -13,10 +13,18 @@ use App\Service\FileUploaderService;
 use App\Repository\PostsRepository;
 use App\Form\PostsType;
 use App\Entity\Posts;
+use App\Entity\PostsMedias;
+use App\Repository\PostsMediasRepository;
 
 #[Route('/account/posts')]
 class PostsAccountController extends AbstractController
 {
+    private  $postsMediasRepository;
+
+    public function __construct(PostsMediasRepository $postsMediasRepository)
+    {
+        $this->postsMediasRepository = $postsMediasRepository;
+    }
     #[Route('/', name: 'app_posts_account_index', methods: ['GET'])]
     public function index(
         PostsRepository $postsRepository
@@ -76,6 +84,7 @@ class PostsAccountController extends AbstractController
         Posts $post, 
         EntityManagerInterface $entityManager,
         FileUploaderService $fileUploader,
+        $kernelUploadDir
     ): Response
     {
         if($post->getFkUser() != $this->getUser()) {
@@ -83,16 +92,15 @@ class PostsAccountController extends AbstractController
                 'error',
                 'Vous n\'avez pas accès à cette ressource.'
             );
+            return $this->redirectToRoute('app_posts_account_index', [], Response::HTTP_SEE_OTHER);
         }
         $form = $this->createForm(PostsType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             preg_match_all('~src="\K[^"]+~', $post->getContent(), $matches);
-            foreach($matches[0] as $match) {
-                echo basename($match);
-            }
-            dd($matches);
+            $this->manageContentImages($matches, $post, $entityManager, $kernelUploadDir);
+            
             $uow = $entityManager->getUnitOfWork();
             $oldValues = $uow->getOriginalEntityData($post);
             $file = $form['picture']->getData();
@@ -105,6 +113,11 @@ class PostsAccountController extends AbstractController
                 $post->setPicture($oldValues['picture']);
             }
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Mise à jour effectuée !'
+            );
 
             return $this->redirectToRoute('app_posts_account_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -124,13 +137,64 @@ class PostsAccountController extends AbstractController
         $kernelUploadDir
     ): Response
     {
+        if($post->getFkUser() != $this->getUser()) {
+            $this->addFlash(
+                'error',
+                'Vous n\'avez pas accès à cette ressource.'
+            );
+            return $this->redirectToRoute('app_posts_account_index', [], Response::HTTP_SEE_OTHER);
+        }
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->getPayload()->get('_token'))) {
             @unlink($kernelUploadDir . '/uploads/' . $post->getPicture());
+            $postFiles = $this->postsMediasRepository->findFilenameByPost($post);
+            foreach($postFiles as $file) {
+                @unlink($kernelUploadDir . '/uploads/' . $file);
+            }
+            $this->postsMediasRepository->removeByPost($post);
             $entityManager->remove($post);
             $entityManager->flush();
         }
             
         return $this->redirectToRoute('app_posts_account_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function manageContentImages($matches, $post, $entityManager, $kernelUploadDir)
+    {
+        $postFiles = $this->postsMediasRepository->findFilenameByPost($post);
+        $filenames = [];
+        foreach($matches[0] as $match) {
+            array_push($filenames, basename($match));
+            if(!$this->recursive_array_search(basename($match), $postFiles)) {
+                $postsMedias = new PostsMedias;
+                $postsMedias->setFkPost($post);
+                $postsMedias->setFilename(basename($match));
+                $entityManager->persist($postsMedias);
+            }
+        }
+        $entityManager->flush();
+    
+        foreach($postFiles as $file) {
+            if(!$this->recursive_array_search($file['filename'], $filenames)) {
+                @unlink($kernelUploadDir . '/uploads/' . $file['filename']);
+                $this->postsMediasRepository->deleteByFilename($file['filename']);
+            }
+        }
+    }
+
+    private function recursive_array_search($needle, $haystack, $currentKey = '') 
+    {
+        foreach($haystack as $key=>$value) {
+            if (is_array($value)) {
+                $nextKey = $this->recursive_array_search($needle,$value, $currentKey . '[' . $key . ']');
+                if ($nextKey) {
+                    return $nextKey;
+                }
+            }
+            else if($value==$needle) {
+                return true;
+            }
+        }
+        return false;
     }
     
 }

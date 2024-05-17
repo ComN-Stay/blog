@@ -16,6 +16,36 @@ class PostsMediasRepository extends ServiceEntityRepository
         parent::__construct($registry, PostsMedias::class);
     }
 
+    public function deleteByFilename($filename)
+    {
+        return $this->createQueryBuilder('p')
+            ->delete()
+            ->andWhere('p.filename = :filename')
+            ->setParameter('filename', $filename)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findFilenameByPost($post)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.filename')
+            ->andWhere('p.fk_post = :post')
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function removeByPost($post)
+    {
+        return $this->createQueryBuilder('p')
+            ->delete()
+            ->andWhere('p.fk_post = :post')
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return PostsMedias[] Returns an array of PostsMedias objects
     //     */
