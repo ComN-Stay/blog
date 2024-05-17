@@ -327,3 +327,24 @@ $(document).on('click', '._deleteAvatar', function(e){
 });
 
 $('#posts_fk_tags').addClass('d-flex flex-row justify-content-around');
+
+$(document).on('click', '#deleteAccount', function(e){
+    e.preventDefault;
+    $.confirm({
+        theme: 'supervan',
+        icon: 'fa-solid fa-triangle-exclamation fa-2xl text-red',
+        title: '',
+        content: 'Voulez vous vraiment supprimer votre compte ?<br />Cete action est irréversible ...<br />Tous vos articles et vos données personnelles seront effacés',
+        buttons: {
+            confirm: {
+                text: "Oui",
+                action: function() {
+                    $('#AccountDeleteBtn').trigger('click');
+                }
+            },
+            cancel: {
+                text: "Non"
+            }
+        }
+    });
+})

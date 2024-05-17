@@ -2,18 +2,21 @@
 
 namespace App\Controller\Account;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Finder\Finder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\FileUploaderService;
 use App\Repository\UsersRepository;
+use App\Repository\PostsRepository;
+use App\Repository\PostsMediasRepository;
 use App\Form\UsersType;
 use App\Entity\Users;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/account/users')]
 class UsersAccountController extends AbstractController
@@ -107,14 +110,44 @@ class UsersAccountController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_users_account_delete', methods: ['POST'])]
-    public function delete(Request $request, Users $user, EntityManagerInterface $entityManager): Response
+    public function delete(
+        Request $request, 
+        Users $user, 
+        EntityManagerInterface $entityManager,
+        PostsRepository $postsRepository,
+        PostsMediasRepository $postsMediasRepository,
+        TokenStorageInterface $tokenStorage,
+        $kernelUploadDir
+    ): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {
-            dd($user);
-            /*$entityManager->remove($user);
-            $entityManager->flush();*/
+            $test = preg_match('#perso\d#', $user->getAvatar(), $matches);
+            if($test == 0) {
+                @unlink($kernelUploadDir . '/personas/' . $user->getAvatar());
+            }
+            $posts = $postsRepository->findBy(['fk_user' => $user]);
+            foreach($posts as $post) {
+                @unlink($kernelUploadDir . '/uploads/' . $post->getPicture());
+                $postFiles = $postsMediasRepository->findFilenameByPost($post);
+                foreach($postFiles as $file) {
+                    @unlink($kernelUploadDir . '/uploads/' . $file);
+                }
+                $postsMediasRepository->removeByPost($post);
+                $entityManager->remove($post);
+                $entityManager->flush();
+            }
+            $entityManager->remove($user);
+            $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
+        $request->getSession()->invalidate();
+        $tokenStorage->setToken();
+
+        $this->addFlash(
+            'success',
+            'Votre compte a bien été supprimé'
+        );
+
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
